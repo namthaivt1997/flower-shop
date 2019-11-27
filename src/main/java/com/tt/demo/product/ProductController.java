@@ -5,7 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api/product")
@@ -58,4 +60,13 @@ public class ProductController {
 		return productRepository.save(product);
 	}
 
+	@GetMapping("/price")
+	public Iterable<Product> getPrice(@RequestParam Double price1, @RequestParam Double price2) {
+		List<Product> products = new ArrayList<>();
+
+		for (Product p : productRepository.findAll()) {
+			products.add(p);
+		}
+		return products.stream().filter(item -> item.getPrice() > price1 && item.getPrice() < price2).sorted((a, b) -> a.getPrice().compareTo(b.getPrice())).collect(Collectors.toList());
+	}
 }

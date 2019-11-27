@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
 @Component({
@@ -8,6 +8,10 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ProductComponent implements OnInit {
 
+  @ViewChild('.a', {static: false}) a: number;
+  @ViewChild('.b', {static: false}) b: number;
+  price1: number;
+  price2: number;
   product: Product[] = [];
   page: number;
   constructor(private http: HttpClient) { }
@@ -25,6 +29,16 @@ export class ProductComponent implements OnInit {
       });
       this.collection = data;
     });
+  }
+
+  getPrice(price1,price2) {
+    this.http.get<Product[]>(`api/product/price?price1=${price1}&price2=${price2}`).subscribe(data =>{
+      data.forEach(data => {
+        data.imgUrl = atob(data.imgUrl);
+      });
+      this.collection = data;
+      console.log(this.collection);
+    })
   }
 }
 

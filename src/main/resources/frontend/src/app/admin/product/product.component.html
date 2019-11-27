@@ -1,16 +1,26 @@
 
 
 
+<div>
+  <input class="a" (value)="price1" #a>
+  <input class="b" (value)="price2" #b>
+  <button (click)="getPrice(a.value,b.value)">Submit</button>
+</div>
 
-  <ul>
-    <li *ngFor="let item of collection | paginate: { itemsPerPage: 10, currentPage: p }">
-      <div class="row">
-      <div class="col">{{item.name}}</div>
-      <div class="col">{{item.price}}</div>
-      <div class="col">{{item.id}}</div>
-      <div class="col"><img src="{{item.imgUrl}}"></div>
+
+
+    <div class="container-fluid">
+      <div class="row ">
+        <div class="col-sm-4 border border-dark" *ngFor="let item of collection | paginate: { itemsPerPage: 30, currentPage: p }">
+          <div class="d-flex justify-content-center">
+            <div ><img src="{{item.imgUrl}}"></div>
+            <div >{{item.name}}</div>
+            <div >{{item.price}}</div>
+            <div >{{item.id}}</div>
+          </div>
+        </div>
       </div>
-    </li>
-  </ul>
+    </div>
+
 
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
