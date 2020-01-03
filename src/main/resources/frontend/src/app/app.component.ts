@@ -7,10 +7,16 @@ import {Component, TemplateRef} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  check = '';
+  id = '';
+  pw = '';
   constructor() {}
 
   Login() {
-    localStorage.setItem('username','thai');
-    console.log(localStorage.getItem('username'));
+    console.log(this.id,this.pw);
+    if(this.id, this.pw){
+      this.check = 'landing';
+    }
+    return this.check
   }
 }

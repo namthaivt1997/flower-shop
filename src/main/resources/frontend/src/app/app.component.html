@@ -66,12 +66,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <input>
-        <input>
+        <input [(ngModel)]="id" required>
+        <input [(ngModel)]="pw" required>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="Login(id,pw)">Login</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="Login()" routerLink="test">Login</button>
+        <div>{{id}}</div>
       </div>
     </div>
   </div>
